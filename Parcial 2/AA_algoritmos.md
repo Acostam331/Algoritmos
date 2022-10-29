@@ -267,7 +267,7 @@ void min_heapify(int *A, int i, int heap_size)
         smallest = i;
 
     // As long as the right index is smaller than the array size and if the r index of the array is smaller than the "smallest" variable index of the array
-    if (r < heap_size && A[r] < A[largest])
+    if (r < heap_size && A[r] < A[smallest])
         // Define the right node as the largest
         smallest = r;
 
