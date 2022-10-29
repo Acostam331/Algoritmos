@@ -104,6 +104,62 @@ void merge(int *A, int p, int q, int r)
 ### Ejemplo de resultado
 ![](Merge.png)
 
+## Analisis matematico
+
+### Analizando merge()
+Dado que existen 3 bucles for al mismo nivel, sin ninguna dependencia entre si ni proceso anidado, se concluye que merge() es $O(n)$.
+```c++
+void merge(int *A, int p, int q, int r)
+{
+    int i, j;
+    int n1 = q - p + 1;
+    int n2 = r - q;
+    int L[n1 + 1], R[n2 + 1];
+    for (i = 0; i < n1; i++)
+        L[i] = A[p + i];
+    for (j = 0; j < n2; j++)
+        R[j] = A[q + 1 + j];
+    L[n1] = INT_MAX;
+    R[n2] = INT_MAX;
+    i = j = 0;
+    for (int k = p; k <= r; k++)
+        if (L[i] < R[j])
+        {
+            A[k] = L[i];
+            i++;
+        }
+        else
+        {
+            A[k] = R[j];
+            j++;
+        }
+}
+```
+
+### Analizando merge_sort()
+Dado que merge() es $O(n)$, concluimos que el resto de la funcion sin incluir la recurrencia es $O(n)$.
+###
+Valor de la primera llamada recursiva, $T(n)=T({n\over2})$
+###
+Valor de la segunda llamada recursiva, $T(n)=T({n\over2})$
+###
+Por lo tanto, la $T(n)$ de merge_sort() se define como $T(n)=2T({n\over2})+O(n)$
+```c++
+void merge_sort(int *A, int p, int r)
+{
+    if (p < r)
+    {
+        int q = floor((p + r) / 2);
+        merge_sort(A, p, q);
+        merge_sort(A, q + 1, r);
+        merge(A, p, q, r);
+    }
+}
+```
+# PENDIENTE
+![](Merge_analisis_temp.png)
+![](Merge_analisis_temp2.png)
+
 #
 
 # Heap sort
@@ -280,6 +336,61 @@ void min_heapify(int *A, int i, int heap_size)
 }
 ```
 
+## Analisis matematico
+
+# PENDIENTE
+
+### Analizando max_heapify()
+![](Max_heapify_recurrencia.png)
+![](max_heapify.png)
+
+```c++
+void max_heapify(int *A, int i, int heap_size)
+{
+    int largest;
+    int l = left(i);
+    int r = right(i);
+    if (l < heap_size && A[l] > A[i])
+        largest = l;
+    else
+        largest = i;
+    if (r < heap_size && A[r] > A[largest])
+        largest = r;
+    if (largest != i)
+    {
+        swap(A, i, largest);
+        max_heapify(A, largest, heap_size);
+    }
+}
+```
+
+### Analizando build_max_heap()
+![](build_max_heap.png)
+```c++
+void build_max_heap(int *A, int heap_size)
+{
+    for (int i = floor(heap_size / 2) - 1; i >= 0; i--)
+        max_heapify(A, i, heap_size);
+}
+```
+
+### Analizando heapsort()
+![](Merge_analisis_temp.png)
+![](Merge_analisis_temp2.png)
+```c++
+void heapsort(int *A, int n)
+{
+    int heap_size = n;
+    build_max_heap(A, heap_size);
+    for (int i = n - 1; i > 0; i--)
+    {
+        swap(A, 0, i);
+        heap_size--;
+        max_heapify(A, 0, heap_size);
+    }
+}
+```
+
 #
 
 # Quick sort
@@ -355,6 +466,43 @@ int partition(int *A, int p, int r)
 
 ### Ejemplo de resultado
 ![](Quick.png)
+
+## Analisis matematico
+
+### Analizando partition()
+![](partition.png)
+```c++
+int partition(int *A, int p, int r)
+{
+    int pivot = A[r];
+    int tracker = p - 1;
+    for (int j = p; j < r; j++)
+        if (A[j] <= pivot)
+        {
+            tracker++;
+            swap(A, j, tracker);
+        }
+    tracker++;
+    swap(A, r, tracker);
+    return tracker;
+}
+```
+
+### Analizando quicksort()
+![](partition.png)
+![](quicksort.png)
+```c++
+void quicksort(int *A, int p, int r)
+{
+    if (p < r)
+    {
+        int q = partition(A, p, r);
+        quicksort(A, p, q - 1);
+        quicksort(A, q + 1, r);
+    }
+}
+```
+
 
 # Recurrencias
 
