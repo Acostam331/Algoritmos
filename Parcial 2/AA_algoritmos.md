@@ -1,4 +1,110 @@
-# Algoritmos repaso parcial 2
+# Analisis de Algoritmos repaso parcial 2
+
+# Algoritmos
+# Merge sort
+
+## Merge sort ascendente
+Merge sort es un algoritmo el cual busca segmentar un arreglo de datos original en una serie de subarreglos partiendo del arreglo original, buscando la mitad, y generando una subseccion izquierda y una derecha, con al intencion de generar subrutinas para optimizar los recursos.
+
+#
+
+## Deconstruyendo cada funcion
+
+### main()
+En la funcion main() se declarara un arreglo de datos dependiente de n, pasandose como argumento a la funcion merge_sort()
+```c++
+int main()
+{
+    // Array size
+    int n = 8;
+    // Data array
+    int A[n] = {5, 2, 4, 7, 1, 3, 2, 6};
+
+    // First merge sort algorithm callback, with p=0, r=n-1
+    merge_sort(A, 0, n - 1);
+
+    show_array(A, n);
+
+    return 0;
+}
+```
+
+### merge_sort(int *A, int p, int r)
+La funcion merge_sort(), dados los indices superior e inferior de una seccion de una arreglo, mientras no sean iguales, se genera un indice que divide en dos partes con la formula $floor({p+r}) \over 2$, el cual genera un dato partiendo de la suma de ambos indices, aproximado al entero menor, dividido entre 2, ejecutandose recursivamente, segmentando en subsecciones al arreglo original hasta generar subsecciones de longitud n.
+```c++
+// With A as the full array as reference, p as first index and r as last index
+void merge_sort(int *A, int p, int r)
+{
+    // As long as p is lower than r, a double recursive call will be made
+    if (p < r)
+    {
+        // With q as the half way index of the array, cutting it in half
+        int q = floor((p + r) / 2);
+
+        // Double recursive call
+
+        // Using q instead of r to cut the first half
+        merge_sort(A, p, q);
+        // using q+1 instead of p to cut the second half
+        merge_sort(A, q + 1, r);
+        // Merge alhoritm callback, sending an array(A), first index(p), half index(q) and last index(r) of subsection
+        merge(A, p, q, r);
+    }
+}
+```
+
+### merge(int *A, int p, int q, int r)
+La funcion merge() genera subarreglos a partir de las subsecciones generadas por merge_sort(), creando un elemento adicional en cada subarreglo, que tomara el valor del mayor entero calculable por el procesador, generando una comparativa entre ambos subarreglos(L, R), aumentando progresivamente el indicie del menor en cada comparacion, hasta llegar al final del arreglo auxiliar en uso.
+```c++
+// Merge algorithm, receiving a full array(A), first index(p), half index(q) and last index(r) of each subsection
+void merge(int *A, int p, int q, int r)
+{
+    // Declaring i and auxiliar indexes
+    int i, j;
+    // Declaring n1, known as the length of the left most part of the subsection
+    int n1 = q - p + 1;
+    // Declaring n2, known as the lenth of the right most part of the subsection
+    int n2 = r - q;
+    // Declaring L and R, subarrays that will store the data of the subsections, +1 extra element
+    int L[n1 + 1], R[n2 + 1];
+
+    // Filling Left subarray with the data of A argument, form 0 to n1, left most part
+    for (i = 0; i < n1; i++)
+        // Using data from array starting from p+i index, with p being first index
+        L[i] = A[p + i];
+    // Filling right subarray with the data of A argument, form 0 to n2, right most part
+    for (j = 0; j < n2; j++)
+        // Using data from array starting from q+1+j index, with q+1 being the half index
+        R[j] = A[q + 1 + j];
+
+    // Assigning the max capable number of the computer to last index of L and R subarrays
+    L[n1] = INT_MAX;
+    R[n2] = INT_MAX;
+
+    // Reusing i and j indexes, assigning values back to 0
+    i = j = 0;
+
+    // For loop starting in p, ending in r, used for comparing both sides of the subarrays L and R
+    for (int k = p; k <= r; k++)
+        // if left subarray is bigger than right, the original array changes its k element for the L elements, stopping in last element of subarray
+        if (L[i] < R[j])
+        {
+            A[k] = L[i];
+            i++;
+        }
+        // if right subarray is bigger than left, the original array changes its k element for the R elements, stopping in last element of subarray
+        else
+        {
+            A[k] = R[j];
+            j++;
+        }
+}
+```
+
+### Ejemplo de resultado
+![](Merge.png)
+
+#
 
 # Heap sort
 
@@ -173,3 +279,82 @@ void min_heapify(int *A, int i, int heap_size)
     }
 }
 ```
+
+#
+
+# Quick sort
+Quick sort es una evolucion de merge sort, el cual se basa en el ultimo elemento del array en cada iteracion como pivote de comparacion, recorriendo los indices menores a el, buscando valores menores, mandandolos a la izquierda en caso de cumplirse la condicion, y en caso de encontrar valores mayores, se ubican a la derecha de los elementos a evaluar con respecto al pivote. El objetivo es dejar todos los elementos menores a la izquierda y todos los mayores a la derecha, intercambiando el pivote por el primer elemento mayor que el en el arreglo, tomando su posicion correcta.
+
+#
+
+## Deconstruyendo cada funcion
+
+### main()
+En la funcion main() se declarara un arreglo de datos dependiente de n, pasandose como argumento a la funcion quicksort()
+```c++
+int main()
+{
+    int n = 8;
+    int A[n] = {2, 8, 7, 1, 3, 5, 6, 4};
+
+    quicksort(A, 0, n - 1);
+
+    show_array(A, n);
+
+    return 0;
+}
+```
+
+### quicksort(int *A, int p, int r)
+Funcion principal de quicksort, es la encargada de hacer las llamadas recursivas dentro del algoritmo, dependiendo de los indices que se reciben, se comparan para entrar a un proceso recursivo.
+```c++
+// Main function for quicksort, receives an array(A), the first index(p) and last index(r) of that iteration
+void quicksort(int *A, int p, int r)
+{
+    // if the first index is smaller than the last index
+    if (p < r)
+    {
+
+        int q = partition(A, p, r);
+        // Recursive call for left most section of the array based on q as the last index
+        quicksort(A, p, q - 1);
+        // Recursive call for right most section of the array based on q as the fisrt index
+        quicksort(A, q + 1, r);
+    }
+}
+```
+
+### partition(int *A, int p, int r)
+Es la funcion principal de quicksort, recibe un arreglo y dos indices(p, r), declara un pivote, el cual se utiliza en un bucle, recorriendo todo el arreglo en los elementos anteriores, utilizandolo como comparador con respecto a cada elemento, buscando valores menores a el,finalmente intercambiandose con el tracker. Dicho elemento es el indice menor recibido disminuido en 1, el cual sigue al primer elemento mayor en el array.
+```c++
+// Main quicksort algorithm, receives an array(A), the first index(p) and the last index(r) of that iteration
+int partition(int *A, int p, int r)
+{
+    // Declare and define the pivot, it has to be the last element of the iteration(r)
+    int pivot = A[r];
+    // Declare and define the tracker, it is based on the first index of the callback
+    int tracker = p - 1;
+
+    // For loop that goes through the array from p to r
+    for (int j = p; j < r; j++)
+        // If the element in the for index is smaller than the pivot, the tracker increases in 1 and the element in the j index and the tracker index swap
+        if (A[j] <= pivot)
+        {
+            tracker++;
+            swap(A, j, tracker);
+        }
+
+    // The tracker gets increased by 1 and gets swapped with the last element of the iteration
+    tracker++;
+    swap(A, r, tracker);
+
+    // Function returns the tracker for a recursive call
+    return tracker;
+}
+```
+
+### Ejemplo de resultado
+![](Quick.png)
+
+# Recurrencias
+
