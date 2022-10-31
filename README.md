@@ -6,7 +6,7 @@
 - Quick sort
 - Recurrencias PENDIENTE
 - Probabilidad PENDIENTE
-- Programacion dinamica(Definiciones) PENDIENTE
+- Programacion dinamica(Definiciones)
 - Fibonacci
 
 # Algoritmos
@@ -516,6 +516,92 @@ void quicksort(int *A, int p, int r)
 # Recurrencias
 
 ## PENDIENTE
+
+# Probabilidad
+PENDIENTE
+
+## Probabilidad individual
+Se busca la probabilidad de un evento especifico dentro de un numero n de eventos posibles, debe ser menor a 1.
+$$
+P(Evento)={\text{Casos en los que el evento ocurre} \over \text{Todos los casos posibles}}
+$$
+
+## Probabilidad conjunta
+Se busca la probabilidad de dos casos posibles mutuamente excluyentes, para ello se necesita la probabilidad individual de los casos a evaluar.
+$$
+P(\text{A o B})=P(A)+P(B) 
+$$
+
+## Esperanza o valor esperado
+Se busca aproximar un "Valor esperado" o resultado deseado de una serie de probabilidades, para ello se necesita tanto la probabilidad de cada suceso($P(x)$) como un valor asociado a cada una($x$).
+$$
+E(x)=\sum{(x \times P(x))}
+$$
+
+## Indicator random variable(Variable aleatoria de indicacion)
+Se utiliza en la binarizacion de un evento, es decir, cuando son dos eventos unicos mutuamente excluyentes(La probabilidad de que suceda A, la probabilidad de que no suceda A).
+$$
+I(A)=
+\begin{cases}
+    &1, \text{Si ocurre A} \\ &0, \text{Si no ocurre A}
+\end{cases}
+$$
+
+## probabilidad de sucesos continuos
+Se busca el valor esperado de sucesos con respecto a una probabilidad de un suceso especifico. Ej. la cantidad esperada de caras que caigan si se tira una moneda n veces.
+$$
+X=\sum x_i
+$$
+$$
+E(X)=E(\sum x_i)
+$$
+
+## Probabilidad esperada de un suceso
+Se utiliza al buscar la probabilidad especifica de que un suceso esperado ocurra.
+$$
+E[I(A)]=P(A)
+$$
+
+## Comparacion de datos esperados
+Se busca comparar dos valores enteros $z_i$ y $z_j$ para encontrar el mayor o menor de cada uno de ellos en una iteracion dada, utilizando el termino $z_{ij}$.
+$$
+I(z_{ij})=
+\begin{cases}
+    &1, \text{Si ocurre Zij} \\ &0, \text{Si no ocurre Zij}
+\end{cases}
+$$
+$$
+X_{ij}=I(Z_{ij})
+$$
+$$
+X=\sum_i \sum_j X_{ij}
+$$
+$$
+E(X)=E(\sum_i \sum_j X_{ij})
+$$
+$$
+=\sum_i \sum_j E(X_{ij})
+$$
+$$
+=\sum_i \sum_j E(I(Z_{ij}))
+$$
+$$
+=\sum_i \sum_j P(Z_{ij})
+$$
+
+
+# Programacion dinamica(Definiciones)
+Se añade Memoization a la implementación del problema recursivo. Esto implica utilizar una Estructura de Datos. Por lo general, estructuras de datos estáticas son suficiente, buscando un codigo con un tiempo de ejecucion menor.
+
+## Overlapping subproblem
+Transferir los datos en una tabla en la que se hace la llamada recursiva una y otra vez.
+
+## Substructure optimization
+Se define como la solucion optima a un para un subproblema en lugar de cualquier otra solucion.
+
+
+
+
 
 # Fibonacci
 El algoritmo de fibonacci busca mostrar un elemento n de una estrucutra de datos, sumando los dos ultimos elementos del mismo.
