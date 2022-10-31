@@ -1,5 +1,14 @@
 # Analisis de Algoritmos repaso parcial 2
 
+## Indice
+- Merge Sort
+- Heap sort
+- Quick sort
+- Recurrencias PENDIENTE
+- Probabilidad PENDIENTE
+- Programacion dinamica(Definiciones) PENDIENTE
+- Fibonacci
+
 # Algoritmos
 # Merge sort
 
@@ -102,7 +111,7 @@ void merge(int *A, int p, int q, int r)
 ```
 
 ### Ejemplo de resultado
-![](Merge.png)
+![](./Parcial%202/Merge.png)
 
 ## Analisis matematico
 
@@ -157,8 +166,8 @@ void merge_sort(int *A, int p, int r)
 }
 ```
 # PENDIENTE
-![](Merge_analisis_temp.png)
-![](Merge_analisis_temp2.png)
+![](./Parcial%202/Merge_analisis_temp.png)
+![](./Parcial%202/Merge_analisis_temp2.png)
 
 #
 
@@ -298,7 +307,7 @@ void swap(int *A, int i, int j)
 ```
 
 ### Ejemplo de resultado
-![](Heap.png)
+![](./Parcial%202/Heap.png)
 
 #
 
@@ -341,8 +350,8 @@ void min_heapify(int *A, int i, int heap_size)
 # PENDIENTE
 
 ### Analizando max_heapify()
-![](Max_heapify_recurrencia.png)
-![](max_heapify.png)
+![](./Parcial%202/Max_heapify_recurrencia.png)
+![](./Parcial%202/max_heapify.png)
 
 ```c++
 void max_heapify(int *A, int i, int heap_size)
@@ -365,7 +374,7 @@ void max_heapify(int *A, int i, int heap_size)
 ```
 
 ### Analizando build_max_heap()
-![](build_max_heap.png)
+![](./Parcial%202/build_max_heap.png)
 ```c++
 void build_max_heap(int *A, int heap_size)
 {
@@ -375,8 +384,8 @@ void build_max_heap(int *A, int heap_size)
 ```
 
 ### Analizando heapsort()
-![](Merge_analisis_temp.png)
-![](Merge_analisis_temp2.png)
+![](./Parcial%202/Merge_analisis_temp.png)
+![](./Parcial%202/Merge_analisis_temp2.png)
 ```c++
 void heapsort(int *A, int n)
 {
@@ -465,12 +474,12 @@ int partition(int *A, int p, int r)
 ```
 
 ### Ejemplo de resultado
-![](Quick.png)
+![](./Parcial%202/Quick.png)
 
 ## Analisis matematico
 
 ### Analizando partition()
-![](partition.png)
+![](./Parcial%202/partition.png)
 ```c++
 int partition(int *A, int p, int r)
 {
@@ -489,8 +498,8 @@ int partition(int *A, int p, int r)
 ```
 
 ### Analizando quicksort()
-![](partition.png)
-![](quicksort.png)
+![](./Parcial%202/partition.png)
+![](./Parcial%202/quicksort.png)
 ```c++
 void quicksort(int *A, int p, int r)
 {
@@ -505,3 +514,36 @@ void quicksort(int *A, int p, int r)
 
 
 # Recurrencias
+
+## PENDIENTE
+
+# Fibonacci
+El algoritmo de fibonacci busca mostrar un elemento n de una estrucutra de datos, sumando los dos ultimos elementos del mismo.
+
+## Caso recursivo
+```c++
+int fibonacci_recursive(int n)
+{
+    if (n < 2)
+        return 1;
+    return fibonacci_recursive(n - 1) + fibonacci_recursive(n - 2);
+}
+```
+## Analisis matematico(Caso recursivo)
+![](./Parcial%202/fibonacci_r.png)
+
+## Caso de estructura de datos
+```c++
+int fibonacci(int n)
+{
+    int A[n + 1];
+    A[0] = 1;
+    A[1] = 1;
+    for (int i = 2; i <= n; i++)
+        A[i] = A[i - 1] + A[i - 2];
+    return A[n];
+}
+```
+
+## Analisis matematico(Caso no recursivo)
+![](./Parcial%202/fibonacci.png)

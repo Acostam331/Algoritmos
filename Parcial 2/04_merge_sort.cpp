@@ -73,7 +73,8 @@ void merge_sort(int *A, int p, int r)
         // using q+1 instead of p to cut the second half
         merge_sort(A, q + 1, r);
         // Merge alhoritm callback, sending an array(A), first index(p), half index(q) and last index(r) of subsection
-        }
+        merge(A, p, q, r);
+    }
 }
 
 int main()
