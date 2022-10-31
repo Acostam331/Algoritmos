@@ -605,14 +605,10 @@ $$
 Se añade Memoization a la implementación del problema recursivo. Esto implica utilizar una Estructura de Datos. Por lo general, estructuras de datos estáticas son suficiente, buscando un codigo con un tiempo de ejecucion menor.
 
 ## Overlapping subproblem
-Transferir los datos en una tabla en la que se hace la llamada recursiva una y otra vez.
+Repeticion de problemas anidadeos como subproblemas.
 
 ## Substructure optimization
-Se define como la solucion optima a un para un subproblema en lugar de cualquier otra solucion.
-
-
-
-
+Se da cuando una estructura se puede optimizar, concretamente al tener traslape en los subproblemas, ya que al tener una respuesta de una ocurrencia se tiene la de las demas.
 
 # Fibonacci
 El algoritmo de fibonacci busca mostrar un elemento n de una estrucutra de datos, sumando los dos ultimos elementos del mismo.
