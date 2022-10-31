@@ -4,8 +4,8 @@
 - Merge Sort
 - Heap sort
 - Quick sort
-- Recurrencias PENDIENTE
-- Probabilidad PENDIENTE
+- Recurrencias
+- Probabilidad
 - Programacion dinamica(Definiciones)
 - Fibonacci
 
@@ -165,7 +165,7 @@ void merge_sort(int *A, int p, int r)
     }
 }
 ```
-# PENDIENTE
+
 ![](./Parcial%202/Merge_analisis_temp.png)
 ![](./Parcial%202/Merge_analisis_temp2.png)
 
@@ -347,8 +347,6 @@ void min_heapify(int *A, int i, int heap_size)
 
 ## Analisis matematico
 
-# PENDIENTE
-
 ### Analizando max_heapify()
 ![](./Parcial%202/Max_heapify_recurrencia.png)
 ![](./Parcial%202/max_heapify.png)
@@ -514,11 +512,24 @@ void quicksort(int *A, int p, int r)
 
 
 # Recurrencias
+## Definicion o estructura de una recurrencia
+$$
+T(n)=aT(b)+c
+$$
+Donde $a$ es la cantidad de nodos o llamadas recursivas por nivel, $b$ es la cantidad de datos que se pasan entre llamadas recursivas y $c$ es rapidez del resto del algoritmo.
 
-## PENDIENTE
+## Definicion de los pasos para resolver una recurrencia
+- Paso 1: Calcular el costo de un dato.
+- Paso 2: Calcular cantidad de datos por nodo.
+- Paso 3: Costo de un nodo.
+- Paso 4: Calcular cantidad de nodos por nivel.
+- paso 5: Calcular el costo de un nivel.
+- Paso 6: Calcular el costo de un arbol.
+###
+![](./Parcial%202/recursividad_e.png)
+![](./Parcial%202/recursividad_s.png)
 
 # Probabilidad
-PENDIENTE
 
 ## Probabilidad individual
 Se busca la probabilidad de un evento especifico dentro de un numero n de eventos posibles, debe ser menor a 1.
